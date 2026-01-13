@@ -1,4 +1,5 @@
 import os
+import datetime
 import base64
 import requests
 import openpyxl
@@ -14,28 +15,34 @@ XLSX_FILE = 'data.xlsx'
 # GitHub credentials untuk commit
 GITHUB_TOKEN = 'YOUR_GITHUB_TOKEN_HERE'
 REPO_OWNER = 'willeam10101010-afk'
-REPO_NAME = 'Wz'
-BRANCH = 'Main'
+REPO_NAME = 'rapo-wz'
+BRANCH = 'main'
 
 def load_existing_data():
     """Memuat data dari XLSX jika file ada."""
     if os.path.exists(XLSX_FILE):
         wb = openpyxl.load_workbook(XLSX_FILE)
         sheet = wb.active
-        return [row[0].value for row in sheet.iter_rows(min_row=2) if row[0].value]
-    return []
+        data = {}
+        for row in sheet.iter_rows(min_row=2, values_only=True):
+            if row[0]:
+                data[row[0]] = {'user': row[1], 'datetime': row[2]}
+        return data
+    return {}
 
-def save_data(message):
+def save_data(message, user, dt):
     """Menyimpan pesan baru ke XLSX."""
     if not os.path.exists(XLSX_FILE):
         wb = openpyxl.Workbook()
         sheet = wb.active
         sheet['A1'] = 'Message'
+        sheet['B1'] = 'User'
+        sheet['C1'] = 'DateTime'
     else:
         wb = openpyxl.load_workbook(XLSX_FILE)
         sheet = wb.active
     
-    sheet.append([message])
+    sheet.append([message, user, str(dt)])
     wb.save(XLSX_FILE)
 
 def commit_file_to_github(file_path, commit_message):
@@ -67,19 +74,17 @@ def commit_file_to_github(file_path, commit_message):
 
 async def message_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_message = update.message.text
+    user = update.message.from_user.username or update.message.from_user.first_name
+    dt = datetime.datetime.now()
     existing_data = load_existing_data()
     
-    if user_message.lower() == "commit":
-        if os.path.exists(XLSX_FILE):
-            result = commit_file_to_github(XLSX_FILE, "Update data.xlsx via bot")
-            await update.message.reply_text(result)
-        else:
-            await update.message.reply_text("File data.xlsx tidak ditemukan.")
-    elif user_message in existing_data:
-        await update.message.reply_text("Pesan sudah ada di database.")
+    if user_message in existing_data:
+        info = existing_data[user_message]
+        reply = f"Pesan data pernah dikirim oleh {info['user']} pada {info['datetime']}"
+        await update.message.reply_text(reply)
     else:
         await update.message.reply_text("Data dapat digunakan.")
-        save_data(user_message)
+        save_data(user_message, user, dt)
 
 def main():
     application = ApplicationBuilder().token(TOKEN).build()
