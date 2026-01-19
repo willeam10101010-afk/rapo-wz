@@ -1,6 +1,5 @@
 const { Client, LocalAuth } = require('whatsapp-web.js');
 const qrcode = require('qrcode-terminal');
-const { SocksProxyAgent } = require('socks-proxy-agent');
 
 // Configuration
 const config = {
@@ -33,9 +32,10 @@ const clientOptions = {
 
 // Add proxy configuration if enabled
 if (config.useProxy) {
-    const agent = new SocksProxyAgent(config.proxyUrl);
     clientOptions.puppeteer.args.push(`--proxy-server=${config.proxyUrl}`);
-    console.log(`SOCKS5 Proxy enabled: ${config.proxyUrl}`);
+    // Log proxy (hide credentials for security)
+    const proxyForLog = config.proxyUrl.replace(/\/\/([^:]+):([^@]+)@/, '//***:***@');
+    console.log(`SOCKS5 Proxy enabled: ${proxyForLog}`);
 }
 
 const client = new Client(clientOptions);
@@ -71,6 +71,11 @@ client.on('auth_failure', (msg) => {
 
 // Message event - Handle incoming messages
 client.on('message', async (message) => {
+    // Validate message body
+    if (!message.body || message.body.trim() === '') {
+        return;
+    }
+    
     const contact = await message.getContact();
     const chat = await message.getChat();
     

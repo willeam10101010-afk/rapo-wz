@@ -47,13 +47,15 @@ function handleCustomReply(client) {
 // CONTOH 2: Bot dengan Multiple Proxy
 // ============================================
 
+// CATATAN: Ini hanya contoh! Ganti dengan proxy yang valid sebelum digunakan
 const proxyList = [
-    'socks5://proxy1.example.com:1080',
-    'socks5://proxy2.example.com:1080',
-    'socks5://proxy3.example.com:1080'
+    'socks5://proxy1.example.com:1080',  // Contoh - tidak akan bekerja!
+    'socks5://proxy2.example.com:1080',  // Contoh - tidak akan bekerja!
+    'socks5://proxy3.example.com:1080'   // Contoh - tidak akan bekerja!
 ];
 
-// Pilih proxy secara acak
+// Pilih proxy secara acak dari daftar
+// PERINGATAN: Pastikan proxy di atas adalah proxy yang valid dan dapat diakses
 const randomProxy = proxyList[Math.floor(Math.random() * proxyList.length)];
 
 // ============================================
