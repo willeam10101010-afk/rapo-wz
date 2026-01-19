@@ -15,8 +15,29 @@ Aplikasi WhatsApp bot yang dapat login menggunakan QR code, menerima pesan, memb
 
 - Node.js versi 14 atau lebih tinggi
 - npm (Node Package Manager)
+- Google Chrome atau Chromium browser (untuk puppeteer)
+  - Linux: `sudo apt-get install chromium-browser` atau `google-chrome-stable`
+  - Mac: Chrome biasanya sudah terinstall, atau install via `brew install chromium`
+  - Windows: Download dan install Google Chrome dari website resmi
 
 ## Instalasi
+
+### Metode 1: Instalasi Otomatis (Recommended)
+
+**Linux/Mac:**
+```bash
+git clone https://github.com/willeam10101010-afk/rapo-wz.git
+cd rapo-wz
+chmod +x install.sh
+./install.sh
+```
+
+**Windows:**
+1. Clone atau download repository
+2. Masuk ke folder `rapo-wz`
+3. Double-click file `install.bat`
+
+### Metode 2: Instalasi Manual
 
 1. Clone repository ini:
 ```bash
@@ -28,6 +49,25 @@ cd rapo-wz
 ```bash
 npm install
 ```
+
+**Catatan:** Jika instalasi gagal karena masalah puppeteer/Chrome download, jalankan:
+```bash
+PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true npm install
+```
+
+Atau set environment variable secara permanen (Linux/Mac):
+```bash
+export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+npm install
+```
+
+Windows (PowerShell):
+```powershell
+$env:PUPPETEER_SKIP_CHROMIUM_DOWNLOAD="true"
+npm install
+```
+
+Puppeteer akan menggunakan Chrome/Chromium yang sudah terinstall di sistem Anda.
 
 ## Penggunaan
 
@@ -91,6 +131,17 @@ const config = {
 };
 ```
 
+### 5. Konfigurasi Lanjutan
+
+Untuk konfigurasi lebih lengkap (whitelist, blacklist, custom reply, dll), lihat file `config.template.js` yang berisi berbagai opsi konfigurasi.
+
+Contoh fitur lanjutan di `examples.js`:
+- Balasan kustom berdasarkan kata kunci
+- Log pesan ke file
+- Kirim pesan/gambar ke nomor tertentu
+- Whitelist/blacklist nomor
+- Dan banyak lagi
+
 ## Cara Kerja
 
 1. **Login QR Code**: Bot menggunakan WhatsApp Web API dengan autentikasi QR code
@@ -105,6 +156,10 @@ rapo-wz/
 ├── whatsapp_bot.js      # File utama aplikasi bot
 ├── package.json         # Dependencies dan konfigurasi npm
 ├── .gitignore          # File yang diabaikan git
+├── install.sh          # Script instalasi untuk Linux/Mac
+├── install.bat         # Script instalasi untuk Windows
+├── config.template.js  # Template konfigurasi lanjutan
+├── examples.js         # Contoh penggunaan fitur lanjutan
 ├── telegram_bot.py     # Bot Telegram (legacy)
 └── README.md           # Dokumentasi ini
 ```
