@@ -23,7 +23,7 @@ rapo-wz/
 ## Key Components
 - **Message Handler**: Processes incoming Telegram messages
 - **Data Persistence**: Saves messages with user info and timestamp to Excel
-- **GitHub Integration**: Automatically commits data file to repository
+- **GitHub Integration**: Function available (`commit_file_to_github`) but not currently used in message flow
 - **Duplicate Detection**: Checks if messages were previously sent
 
 ## Setup and Installation
@@ -76,7 +76,8 @@ python telegram_bot.py
 - Manual testing with Telegram bot required for message handling
 - Test with both new and duplicate messages
 - Verify Excel file creation and updates
-- Test GitHub commit functionality (ensure credentials are configured)
+- Verify duplicate message detection returns correct historical information
+- If implementing GitHub auto-commit: test commit_file_to_github function separately
 
 ## What NOT to Change
 - Do NOT modify the Excel file structure (columns: Message, User, DateTime)
@@ -86,6 +87,8 @@ python telegram_bot.py
 
 ## Common Tasks
 - **Adding features**: Extend message_handler function or add new handlers
-- **Modifying responses**: Update reply text in message_handler
-- **Changing storage**: Modify save_data function
-- **GitHub integration**: Update commit_file_to_github function
+- **Modifying responses**: Update reply text in message_handler (keep Indonesian language)
+- **Changing storage**: Modify save_data and load_existing_data functions
+- **Enabling GitHub auto-commit**: Call commit_file_to_github after save_data in message_handler
+- **Adding new data fields**: Update both Excel structure and save/load functions consistently
+- **Testing changes**: Run bot locally and send test messages via Telegram
