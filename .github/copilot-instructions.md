@@ -1,7 +1,7 @@
 # Copilot Instructions for rapo-wz
 
 ## Repository Purpose
-Telegram bot that tracks and validates messages by saving them to an Excel file and committing the data to GitHub. The bot checks if a message has been sent before and responds accordingly.
+Telegram bot that tracks and validates messages by saving them to an Excel file. The bot checks if a message has been sent before and responds accordingly. GitHub integration is available but not currently enabled in the message flow.
 
 ## Tech Stack
 - **Language**: Python 3.x
@@ -81,9 +81,9 @@ python telegram_bot.py
 
 ## What NOT to Change
 - Do NOT modify the Excel file structure (columns: Message, User, DateTime)
-- Do NOT change the GitHub repository configuration variables
 - Do NOT remove or modify credential placeholders
 - Do NOT alter the core message validation logic without careful consideration
+- Note: GitHub repository configuration (REPO_OWNER, REPO_NAME) may need updates for different deployments
 
 ## Common Tasks
 - **Adding features**: Extend message_handler function or add new handlers
