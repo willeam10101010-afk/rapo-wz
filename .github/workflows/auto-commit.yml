@@ -1,0 +1,36 @@
+name: Auto Commit Workflow
+
+on:
+  schedule:
+    - cron: "0 0 * * *" # Runs every day at 00:00 UTC
+  push:
+    branches:
+      - main # Trigger on pushes to the main branch
+
+jobs:
+  auto-commit:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Check out the repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Set up Git configuration
+      - name: Set up Git
+        run: |
+          git config user.name "Your GitHub Username"
+          git config user.email "your-email@example.com"
+
+      # Make changes (add timestamp to auto-commit-log.txt)
+      - name: Make changes
+        run: echo "Update: $(date)" >> auto-commit-log.txt
+
+      # Commit and push the changes
+      - name: Commit and push changes
+        run: |
+          git add .
+          git commit -m "Auto updated at $(date)"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
