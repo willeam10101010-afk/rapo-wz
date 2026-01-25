@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+
+# WhatsApp session data
+.wwebjs_auth/
+.wwebjs_cache/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+data.xlsx
+
+# Environment variables
+.env
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
