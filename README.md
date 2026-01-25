@@ -1,4 +1,222 @@
-# WhatsApp Bot - Login QR & SOCKS5 Proxy Support
+# rapo-wz - Messaging Bot Automation Suite
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Node.js](https://img.shields.io/badge/node-%3E%3D14.0.0-brightgreen)](https://nodejs.org/)
+[![Python](https://img.shields.io/badge/python-3.x-blue)](https://www.python.org/)
+
+A comprehensive messaging bot automation project featuring WhatsApp and Telegram bots with advanced features like QR authentication, message tracking, and proxy support.
+
+[🇮🇩 Bahasa Indonesia](#bahasa-indonesia) | [🇬🇧 English](#english)
+
+---
+
+## English
+
+### 📋 Overview
+
+**rapo-wz** is a multi-platform messaging bot suite that includes:
+- **WhatsApp Bot**: Automated messaging with QR login and SOCKS5 proxy support
+- **Telegram Bot**: Message tracking and validation with Excel storage
+
+### ✨ Features
+
+#### WhatsApp Bot
+- ✅ QR Code Login (like WhatsApp Web)
+- ✅ Real-time message reception
+- ✅ Automated message replies
+- ✅ SOCKS5 Proxy support
+- ✅ Message logging (incoming/outgoing)
+- ✅ Session persistence (no need to scan QR every time)
+
+#### Telegram Bot
+- ✅ Message tracking to Excel file
+- ✅ Duplicate message detection
+- ✅ User and timestamp logging
+- ✅ GitHub integration (optional)
+
+### 🛠️ Technology Stack
+
+- **JavaScript/Node.js**: WhatsApp bot implementation
+- **Python 3.x**: Telegram bot implementation
+- **Shell Script**: Linux/Mac installation automation
+- **Batchfile**: Windows installation automation
+
+**Key Dependencies:**
+- `whatsapp-web.js`: WhatsApp Web API wrapper
+- `python-telegram-bot`: Telegram Bot API wrapper
+- `openpyxl`: Excel file handling
+- `qrcode-terminal`: Terminal QR code display
+
+### 📦 Installation
+
+#### Prerequisites
+
+**For WhatsApp Bot:**
+- Node.js version 14 or higher
+- npm (Node Package Manager)
+- Google Chrome or Chromium browser
+
+**For Telegram Bot:**
+- Python 3.x
+- pip (Python package manager)
+
+#### Quick Install
+
+**Linux/Mac:**
+```bash
+git clone https://github.com/willeam10101010-afk/rapo-wz.git
+cd rapo-wz
+chmod +x install.sh
+./install.sh
+```
+
+**Windows:**
+1. Clone or download the repository
+2. Navigate to `rapo-wz` folder
+3. Double-click `install.bat`
+
+#### Manual Installation
+
+**WhatsApp Bot:**
+```bash
+npm install
+```
+
+If Puppeteer download fails:
+```bash
+PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true npm install
+```
+
+**Telegram Bot:**
+```bash
+pip install python-telegram-bot openpyxl requests
+```
+
+### 🚀 Usage
+
+#### WhatsApp Bot
+
+**Basic Usage:**
+```bash
+npm start
+# or
+node whatsapp_bot.js
+```
+
+**With SOCKS5 Proxy:**
+
+Edit `whatsapp_bot.js`:
+```javascript
+const config = {
+    useProxy: true,  // Enable proxy
+    proxyUrl: 'socks5://127.0.0.1:1080',  // Your proxy URL
+    autoReply: true,
+    autoReplyMessage: 'Thank you for your message!'
+};
+```
+
+Proxy URL formats:
+- Without auth: `socks5://host:port`
+- With auth: `socks5://username:password@host:port`
+
+**QR Code Login:**
+1. Run `npm start`
+2. QR code appears in terminal
+3. Open WhatsApp on your phone
+4. Go to: **Settings** → **Linked Devices** → **Link a Device**
+5. Scan the QR code
+6. Bot is now connected!
+
+#### Telegram Bot
+
+**Configuration:**
+
+Edit `telegram_bot.py`:
+```python
+TOKEN = 'YOUR_BOT_TOKEN_HERE'          # Your Telegram bot token
+GITHUB_TOKEN = 'YOUR_GITHUB_TOKEN_HERE' # Optional: for GitHub integration
+```
+
+**Run:**
+```bash
+python telegram_bot.py
+```
+
+### 📚 Documentation
+
+- **[QUICKSTART.md](QUICKSTART.md)**: Quick start guide (Indonesian)
+- **[MODULES.md](MODULES.md)**: Detailed module documentation
+- **[config.template.js](config.template.js)**: Advanced configuration options
+- **[examples.js](examples.js)**: Usage examples and patterns
+
+### 🤝 Contributing
+
+Contributions are welcome! Here's how you can help:
+
+1. **Fork the repository**
+2. **Create a feature branch**: `git checkout -b feature/amazing-feature`
+3. **Commit your changes**: `git commit -m 'Add amazing feature'`
+4. **Push to the branch**: `git push origin feature/amazing-feature`
+5. **Open a Pull Request**
+
+#### Contribution Guidelines
+
+- Follow existing code style and conventions
+- Keep user-facing messages in Indonesian for consistency
+- Test your changes thoroughly before submitting
+- Update documentation if adding new features
+- Don't commit sensitive data (tokens, credentials)
+
+### 🔒 Security
+
+**Important Security Notes:**
+
+⚠️ **Do NOT commit:**
+- `.wwebjs_auth` folder (WhatsApp session data)
+- `data.xlsx` file (Telegram data)
+- Actual bot tokens or API credentials
+- `.env` files with secrets
+
+✅ **Best Practices:**
+- Use environment variables for sensitive data
+- Keep tokens as placeholders in source code
+- Review `.gitignore` before committing
+- Use trusted proxies only
+- Regularly update dependencies
+
+### 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+### 📞 Support
+
+For issues and questions:
+- Open an issue on GitHub
+- Check existing documentation in `MODULES.md`
+- Review troubleshooting section below
+
+### 🐛 Troubleshooting
+
+**QR Code Not Showing:**
+- Reinstall dependencies: `npm install`
+- Check Node.js version (>= 14)
+- Delete `.wwebjs_auth` and `.wwebjs_cache` folders
+
+**Bot Disconnects:**
+- Check internet connection
+- Verify proxy settings (if using proxy)
+- Ensure WhatsApp on phone is not logged out
+
+**Proxy Not Working:**
+- Verify proxy URL format
+- Test proxy with other applications first
+- Ensure proxy supports SOCKS5
+
+---
+
+## Bahasa Indonesia
+
+### WhatsApp Bot - Login QR & SOCKS5 Proxy Support
 
 Aplikasi WhatsApp bot yang dapat login menggunakan QR code, menerima pesan, membalas pesan, dan mendukung SOCKS5 proxy.
 
@@ -211,8 +429,35 @@ Waktu: 19/1/2026 10:30:45
 
 ## Lisensi
 
-MIT License
+Proyek ini dilisensikan di bawah MIT License - lihat file [LICENSE](LICENSE) untuk detail lengkap.
+
+**Ringkasan MIT License:**
+- ✅ Bebas digunakan untuk tujuan komersial dan pribadi
+- ✅ Bebas dimodifikasi dan didistribusikan
+- ✅ Bebas digunakan secara pribadi
+- ⚠️ Harus menyertakan pemberitahuan hak cipta dan lisensi
+- ⚠️ Tanpa jaminan
 
 ## Kontribusi
 
+Kontribusi sangat diterima! Berikut cara berkontribusi:
+
+1. **Fork repositori ini**
+2. **Buat branch fitur**: `git checkout -b fitur/fitur-keren`
+3. **Commit perubahan**: `git commit -m 'Menambahkan fitur keren'`
+4. **Push ke branch**: `git push origin fitur/fitur-keren`
+5. **Buka Pull Request**
+
+### Panduan Kontribusi
+
+- Ikuti gaya kode yang ada
+- Gunakan bahasa Indonesia untuk pesan yang menghadap pengguna
+- Test perubahan Anda dengan teliti
+- Update dokumentasi jika menambahkan fitur baru
+- Jangan commit data sensitif (token, kredensial)
+
 Silakan buat issue atau pull request jika ingin berkontribusi!
+
+---
+
+**Dokumentasi Lengkap:** Lihat [MODULES.md](MODULES.md) untuk dokumentasi teknis detail tentang semua modul dan komponen.
