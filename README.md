@@ -343,25 +343,6 @@ Contributions are welcome! Here are some ways you can contribute to this project
 
 ---
 
-Bot akan menampilkan log untuk:
-- Pesan yang diterima (dari kontak lain)
-- Pesan yang dikirim (dari Anda)
-- Status koneksi
-- Error (jika ada)
-
-Contoh output:
-```
-----------------------------------------
-Pesan Diterima:
-Dari: John Doe
-Nomor: 6281234567890@c.us
-Pesan: Halo, apa kabar?
-Waktu: 19/1/2026 10:30:45
-----------------------------------------
-
-✓ Balasan otomatis terkirim ke John Doe
-```
-
 ## 📜 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
