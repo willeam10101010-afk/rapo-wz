@@ -1,30 +1,101 @@
-# WhatsApp Bot - Login QR & SOCKS5 Proxy Support
+# Rapo-WZ: Multi-Platform Bot Suite
 
-Aplikasi WhatsApp bot yang dapat login menggunakan QR code, menerima pesan, membalas pesan, dan mendukung SOCKS5 proxy.
+A comprehensive bot automation suite supporting WhatsApp and Telegram platforms with message tracking, auto-reply, and proxy support.
 
-## Fitur
+## 📋 Table of Contents
 
-- ✅ Login menggunakan QR Code (seperti WhatsApp Web)
-- ✅ Menerima pesan secara realtime
-- ✅ Membalas pesan otomatis
-- ✅ Support SOCKS5 Proxy
-- ✅ Log pesan masuk dan keluar
-- ✅ Simpan sesi login (tidak perlu scan QR setiap kali)
+- [Overview](#overview)
+- [Technologies Used](#technologies-used)
+- [Features](#features)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Configuration](#configuration)
+- [Project Structure](#project-structure)
+- [Contributing](#contributing)
+- [License](#license)
+- [Troubleshooting](#troubleshooting)
 
-## Persyaratan
+## 🌟 Overview
 
-- Node.js versi 14 atau lebih tinggi
-- npm (Node Package Manager)
-- Google Chrome atau Chromium browser (untuk puppeteer)
-  - Linux: `sudo apt-get install chromium-browser` atau `google-chrome-stable`
-  - Mac: Chrome biasanya sudah terinstall, atau install via `brew install chromium`
-  - Windows: Download dan install Google Chrome dari website resmi
+This repository contains two independent bot applications:
 
-## Instalasi
+1. **WhatsApp Bot** - A JavaScript/Node.js bot with QR code authentication, real-time message handling, auto-reply, and SOCKS5 proxy support
+2. **Telegram Bot** - A Python bot for message validation and tracking using Excel file storage
 
-### Metode 1: Instalasi Otomatis (Recommended)
+---
 
-**Linux/Mac:**
+## 🛠️ Technologies Used
+
+- **JavaScript** (Node.js) - WhatsApp bot implementation
+- **Python 3.x** - Telegram bot implementation
+- **Shell** - Linux/Mac installation scripts
+- **Batchfile** - Windows installation scripts
+
+### Key Dependencies
+
+**WhatsApp Bot:**
+- `whatsapp-web.js` - WhatsApp Web API wrapper
+- `qrcode-terminal` - QR code generation for terminal
+- `puppeteer` - Headless browser automation
+
+**Telegram Bot:**
+- `python-telegram-bot` - Telegram Bot API wrapper
+- `openpyxl` - Excel file handling
+- `requests` - HTTP client for GitHub API integration
+
+---
+
+## ✨ Features
+
+### WhatsApp Bot
+
+- ✅ **QR Code Authentication** - Login like WhatsApp Web
+- ✅ **Real-time Message Reception** - Receive and log all incoming messages
+- ✅ **Auto-Reply** - Customizable automatic message responses
+- ✅ **SOCKS5 Proxy Support** - Route traffic through SOCKS5 proxy for privacy
+- ✅ **Message Logging** - Track incoming and outgoing messages
+- ✅ **Persistent Session** - Save login session (no need to scan QR every time)
+- ✅ **Custom Reply Rules** - Keyword-based automated responses
+- ✅ **Whitelist/Blacklist** - Filter allowed/blocked contacts
+
+### Telegram Bot
+
+- ✅ **Message Tracking** - Save messages to Excel file with metadata
+- ✅ **Duplicate Detection** - Check if a message was sent before
+- ✅ **User Information** - Track username and timestamp
+- ✅ **GitHub Integration** - Optional GitHub API integration for file commits
+- ✅ **Excel Storage** - Persistent data storage using XLSX format
+
+---
+
+## 📦 Prerequisites
+
+### For WhatsApp Bot
+
+- **Node.js** version 14 or higher
+- **npm** (Node Package Manager)
+- **Google Chrome or Chromium** browser (for puppeteer)
+  - **Linux**: `sudo apt-get install chromium-browser` or `google-chrome-stable`
+  - **macOS**: Install via `brew install chromium` or download Chrome
+  - **Windows**: Download and install Google Chrome from the official website
+
+### For Telegram Bot
+
+- **Python 3.x**
+- **pip** (Python package manager)
+- **Telegram Bot Token** (obtain from [@BotFather](https://t.me/BotFather))
+- **GitHub Token** (optional, for GitHub integration)
+
+---
+
+## 🚀 Installation
+
+### WhatsApp Bot Installation
+
+#### Method 1: Automated Installation (Recommended)
+
+**Linux/macOS:**
 ```bash
 git clone https://github.com/willeam10101010-afk/rapo-wz.git
 cd rapo-wz
@@ -33,13 +104,13 @@ chmod +x install.sh
 ```
 
 **Windows:**
-1. Clone atau download repository
-2. Masuk ke folder `rapo-wz`
-3. Double-click file `install.bat`
+1. Clone or download the repository
+2. Navigate to the `rapo-wz` folder
+3. Double-click the `install.bat` file
 
-### Metode 2: Instalasi Manual
+#### Method 2: Manual Installation
 
-1. Clone repository ini:
+1. Clone the repository:
 ```bash
 git clone https://github.com/willeam10101010-afk/rapo-wz.git
 cd rapo-wz
@@ -50,129 +121,286 @@ cd rapo-wz
 npm install
 ```
 
-**Catatan:** Jika instalasi gagal karena masalah puppeteer/Chrome download, jalankan:
+**Note:** If installation fails due to puppeteer/Chrome download issues, run:
 ```bash
 PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true npm install
 ```
 
-Atau set environment variable secara permanen (Linux/Mac):
+Or set the environment variable permanently:
+
+**Linux/macOS:**
 ```bash
 export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 npm install
 ```
 
-Windows (PowerShell):
+**Windows (PowerShell):**
 ```powershell
 $env:PUPPETEER_SKIP_CHROMIUM_DOWNLOAD="true"
 npm install
 ```
 
-Puppeteer akan menggunakan Chrome/Chromium yang sudah terinstall di sistem Anda.
+Puppeteer will use the Chrome/Chromium already installed on your system.
 
-## Penggunaan
+### Telegram Bot Installation
 
-### 1. Menjalankan Bot Tanpa Proxy
+1. Install required Python packages:
+```bash
+pip install python-telegram-bot openpyxl requests
+```
+
+2. Configure the bot by editing `telegram_bot.py`:
+   - Set `TOKEN` to your Telegram bot token
+   - (Optional) Set GitHub credentials for auto-commit feature:
+     - `GITHUB_TOKEN` - Your GitHub personal access token
+     - `REPO_OWNER` - GitHub repository owner
+     - `REPO_NAME` - GitHub repository name
+
+---
+
+## 🎯 Usage
+
+### WhatsApp Bot
+
+#### 1. Running the Bot Without Proxy
 
 ```bash
 npm start
 ```
 
-Atau:
+Or:
 ```bash
 node whatsapp_bot.js
 ```
 
-### 2. Menjalankan Bot Dengan SOCKS5 Proxy
+#### 2. Running the Bot With SOCKS5 Proxy
 
-Edit file `whatsapp_bot.js` dan ubah konfigurasi berikut:
+Edit `whatsapp_bot.js` and modify the configuration:
 
 ```javascript
 const config = {
-    useProxy: true,  // Ubah ke true
-    proxyUrl: 'socks5://127.0.0.1:1080',  // Ganti dengan URL proxy Anda
+    useProxy: true,  // Change to true
+    proxyUrl: 'socks5://127.0.0.1:1080',  // Replace with your proxy URL
     autoReply: true,
-    autoReplyMessage: 'Terima kasih atas pesan Anda. Pesan Anda telah diterima.'
+    autoReplyMessage: 'Thank you for your message. Your message has been received.'
 };
 ```
 
-Format URL proxy:
-- Tanpa autentikasi: `socks5://host:port`
-- Dengan autentikasi: `socks5://username:password@host:port`
+Proxy URL formats:
+- Without authentication: `socks5://host:port`
+- With authentication: `socks5://username:password@host:port`
 
-Contoh:
+Examples:
 ```javascript
 proxyUrl: 'socks5://127.0.0.1:1080'
 proxyUrl: 'socks5://user:pass@proxy.example.com:1080'
 ```
 
-### 3. Login dengan QR Code
+#### 3. QR Code Login
 
-Saat menjalankan bot pertama kali:
+When running the bot for the first time:
 
-1. Jalankan `npm start`
-2. QR code akan muncul di terminal
-3. Buka WhatsApp di HP Anda
-4. Pergi ke: **Pengaturan** → **Perangkat Tertaut** → **Tautkan Perangkat**
-5. Scan QR code yang muncul di terminal
-6. Bot akan tersambung dan siap digunakan!
+1. Run `npm start`
+2. A QR code will appear in the terminal
+3. Open WhatsApp on your phone
+4. Go to: **Settings** → **Linked Devices** → **Link a Device**
+5. Scan the QR code displayed in the terminal
+6. The bot will be connected and ready to use!
 
-Sesi login akan disimpan, jadi Anda tidak perlu scan QR code setiap kali menjalankan bot.
+The login session will be saved, so you don't need to scan the QR code every time you run the bot.
 
-### 4. Konfigurasi Auto-Reply
+#### 4. Auto-Reply Configuration
 
-Edit file `whatsapp_bot.js` untuk mengubah pengaturan balasan otomatis:
+Edit `whatsapp_bot.js` to change auto-reply settings:
 
 ```javascript
 const config = {
     useProxy: false,
     proxyUrl: 'socks5://127.0.0.1:1080',
-    autoReply: true,  // Set false untuk menonaktifkan auto-reply
-    autoReplyMessage: 'Pesan Anda sudah diterima!'  // Ubah pesan balasan
+    autoReply: true,  // Set to false to disable auto-reply
+    autoReplyMessage: 'Your message has been received!'  // Change reply message
 };
 ```
 
-### 5. Konfigurasi Lanjutan
+#### 5. Advanced Configuration
 
-Untuk konfigurasi lebih lengkap (whitelist, blacklist, custom reply, dll), lihat file `config.template.js` yang berisi berbagai opsi konfigurasi.
+For more comprehensive configuration (whitelist, blacklist, custom replies, etc.), see the `config.template.js` file which contains various configuration options.
 
-Contoh fitur lanjutan di `examples.js`:
-- Balasan kustom berdasarkan kata kunci
-- Log pesan ke file
-- Kirim pesan/gambar ke nomor tertentu
-- Whitelist/blacklist nomor
-- Dan banyak lagi
+Example advanced features in `examples.js`:
+- Custom replies based on keywords
+- Log messages to file
+- Send messages/images to specific numbers
+- Whitelist/blacklist numbers
+- And much more
 
-## Cara Kerja
+### Telegram Bot
 
-1. **Login QR Code**: Bot menggunakan WhatsApp Web API dengan autentikasi QR code
-2. **Menerima Pesan**: Semua pesan yang masuk akan tercatat di console dengan detail pengirim dan waktu
-3. **Membalas Pesan**: Bot dapat membalas pesan secara otomatis (jika diaktifkan)
-4. **SOCKS5 Proxy**: Koneksi dapat dialihkan melalui SOCKS5 proxy untuk privasi/keamanan
+#### 1. Running the Telegram Bot
 
-## Struktur File
+```bash
+python telegram_bot.py
+```
+
+#### 2. How It Works
+
+1. Send a text message to your bot on Telegram
+2. The bot checks if the message has been sent before
+3. If it's a new message:
+   - Bot replies: "Data dapat digunakan." (Data can be used)
+   - Saves the message to `data.xlsx` with user info and timestamp
+4. If it's a duplicate message:
+   - Bot replies with who sent it previously and when
+
+#### 3. Data Storage
+
+The bot stores messages in an Excel file (`data.xlsx`) with the following structure:
+- **Message**: The text content
+- **User**: Username or first name of the sender
+- **DateTime**: Timestamp when the message was sent
+
+#### 4. GitHub Integration (Optional)
+
+The bot includes a `commit_file_to_github()` function that can automatically commit the Excel file to your GitHub repository. To enable this feature:
+
+1. Set your GitHub credentials in `telegram_bot.py`
+2. Call the function after saving data in the `message_handler()` function
+3. The Excel file will be automatically committed to your repository
+
+**Note:** This feature is currently not enabled in the default message flow.
+
+---
+
+## ⚙️ Configuration
+
+### WhatsApp Bot Configuration Files
+
+- **`whatsapp_bot.js`** - Main bot file with basic configuration
+- **`config.template.js`** - Template with all available configuration options
+- **`examples.js`** - Example implementations of advanced features
+
+### Telegram Bot Configuration
+
+Edit `telegram_bot.py` to configure:
+- `TOKEN` - Your Telegram bot token (required)
+- `GITHUB_TOKEN` - Your GitHub personal access token (optional)
+- `REPO_OWNER` - Repository owner username (optional)
+- `REPO_NAME` - Repository name (optional)
+- `BRANCH` - Git branch name (optional, default: 'main')
+
+---
+
+## 📁 Project Structure
 
 ```
 rapo-wz/
-├── whatsapp_bot.js      # File utama aplikasi bot
-├── package.json         # Dependencies dan konfigurasi npm
-├── .gitignore          # File yang diabaikan git
-├── install.sh          # Script instalasi untuk Linux/Mac
-├── install.bat         # Script instalasi untuk Windows
-├── config.template.js  # Template konfigurasi lanjutan
-├── examples.js         # Contoh penggunaan fitur lanjutan
-├── telegram_bot.py     # Bot Telegram (legacy)
-└── README.md           # Dokumentasi ini
+├── whatsapp_bot.js      # Main WhatsApp bot application
+├── telegram_bot.py      # Main Telegram bot application
+├── package.json         # Node.js dependencies and npm configuration
+├── .gitignore          # Git ignore file
+├── install.sh          # Installation script for Linux/macOS
+├── install.bat         # Installation script for Windows
+├── config.template.js  # Advanced configuration template for WhatsApp bot
+├── examples.js         # Advanced feature examples for WhatsApp bot
+├── QUICKSTART.md       # Quick start guide (Indonesian)
+└── README.md           # This documentation file
 ```
 
-## Log Pesan
+### Generated Files (not in repository)
 
-Bot akan menampilkan log untuk:
-- Pesan yang diterima (dari kontak lain)
-- Pesan yang dikirim (dari Anda)
-- Status koneksi
-- Error (jika ada)
+- `.wwebjs_auth/` - WhatsApp session data (automatically created)
+- `.wwebjs_cache/` - WhatsApp cache data (automatically created)
+- `data.xlsx` - Telegram bot Excel data file (automatically created)
+- `node_modules/` - Node.js dependencies (created after npm install)
 
-Contoh output:
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Here are some ways you can contribute to this project:
+
+1. **Report bugs** - Open an issue describing the bug and steps to reproduce
+2. **Suggest features** - Open an issue with your feature request
+3. **Submit pull requests** - Fork the repository, make your changes, and submit a PR
+
+### Contribution Guidelines
+
+- Follow the existing code style and conventions
+- Test your changes thoroughly before submitting
+- Update documentation if you're adding new features
+- Keep commits focused and write clear commit messages
+- For Python code, maintain the Indonesian language for user-facing messages
+- Ensure no sensitive data (tokens, credentials) is committed
+
+### Development Setup
+
+1. Fork the repository
+2. Clone your fork: `git clone https://github.com/your-username/rapo-wz.git`
+3. Create a new branch: `git checkout -b feature/your-feature-name`
+4. Make your changes and test them
+5. Commit your changes: `git commit -m "Add your feature"`
+6. Push to your fork: `git push origin feature/your-feature-name`
+7. Open a Pull Request
+
+---
+
+## 📜 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 🔧 Troubleshooting
+
+### WhatsApp Bot Issues
+
+#### QR Code Not Appearing
+- Ensure Node.js is installed correctly
+- Run `npm install` again
+- Try deleting the `.wwebjs_auth` and `.wwebjs_cache` folders and retry
+
+#### Bot Keeps Disconnecting
+- Check your internet connection
+- If using a proxy, ensure the proxy is working properly
+- Make sure WhatsApp on your phone hasn't logged out
+
+#### Proxy Not Working
+- Verify the proxy URL format is correct
+- Test the proxy with another application first
+- Check if the proxy supports SOCKS5 protocol
+
+#### npm Install Fails
+- Try running with: `PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true npm install`
+- Ensure you have Chrome or Chromium installed on your system
+- Check your Node.js and npm versions
+
+### Telegram Bot Issues
+
+#### Bot Not Responding
+- Verify your bot token is correct
+- Check that the bot is running (`python telegram_bot.py`)
+- Ensure you have started a conversation with the bot on Telegram
+
+#### Excel File Errors
+- Ensure you have write permissions in the directory
+- Check that `openpyxl` is installed: `pip install openpyxl`
+- If the file is corrupted, delete `data.xlsx` and let it regenerate
+
+#### GitHub Integration Not Working
+- Verify your GitHub token has the necessary permissions
+- Check that the repository owner and name are correct
+- Ensure the GitHub API is accessible from your network
+
+---
+
+## 📊 Message Logging (WhatsApp Bot)
+
+The bot will display logs for:
+- **Received messages** (from other contacts)
+- **Sent messages** (from you)
+- **Connection status**
+- **Errors** (if any)
+
+Example output:
 ```
 ----------------------------------------
 Pesan Diterima:
@@ -185,34 +413,49 @@ Waktu: 19/1/2026 10:30:45
 ✓ Balasan otomatis terkirim ke John Doe
 ```
 
-## Troubleshooting
+---
 
-### QR Code tidak muncul
-- Pastikan Node.js sudah terinstall dengan benar
-- Jalankan `npm install` ulang
-- Coba hapus folder `.wwebjs_auth` dan `.wwebjs_cache`
+## 🔐 Security
 
-### Bot terputus terus
-- Cek koneksi internet
-- Jika menggunakan proxy, pastikan proxy berfungsi dengan baik
-- Pastikan WhatsApp di HP tidak logout
+⚠️ **Important Security Notes:**
 
-### Proxy tidak bekerja
-- Pastikan format URL proxy benar
-- Test proxy dengan aplikasi lain terlebih dahulu
-- Cek apakah proxy mendukung SOCKS5
+### WhatsApp Bot
+- **DO NOT** share the `.wwebjs_auth` folder as it contains your login session
+- **DO NOT** commit session files to git (already in .gitignore)
+- Use **trusted proxies only**
+- Proxy credentials are not visible in logs for security
 
-## Keamanan
+### Telegram Bot
+- **NEVER** commit actual tokens or credentials to the repository
+- Keep placeholder values as-is in the code
+- Use environment variables or secure configuration for production
+- **DO NOT** expose sensitive data in logs or error messages
 
-⚠️ **Penting:**
-- Jangan share folder `.wwebjs_auth` karena berisi sesi login Anda
-- Jangan commit file sesi ke git (sudah ada di .gitignore)
-- Gunakan proxy terpercaya saja
+### General Security Best Practices
+- Regularly update dependencies to patch security vulnerabilities
+- Monitor bot activity for unusual behavior
+- Implement rate limiting if deploying for production use
+- Follow the principle of least privilege for API tokens
 
-## Lisensi
+---
 
-MIT License
+## 📞 Support
 
-## Kontribusi
+- Open an [issue](https://github.com/willeam10101010-afk/rapo-wz/issues) for bug reports or feature requests
+- Check existing issues before opening a new one
+- For quick help, see the [QUICKSTART.md](QUICKSTART.md) guide
 
-Silakan buat issue atau pull request jika ingin berkontribusi!
+---
+
+## 📝 Additional Resources
+
+- **WhatsApp Web.js Documentation**: [whatsapp-web.js](https://wwebjs.dev/)
+- **python-telegram-bot Documentation**: [python-telegram-bot](https://python-telegram-bot.readthedocs.io/)
+- **Node.js**: [nodejs.org](https://nodejs.org/)
+- **Python**: [python.org](https://www.python.org/)
+
+---
+
+**Happy messaging! 🚀**
+
+Made with ❤️ by the Rapo-WZ team
